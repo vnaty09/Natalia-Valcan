@@ -9,8 +9,8 @@ int main() {
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
 
     std::vector<std::string> words = {
-        "programare",
-        "calculator",
+        "programming",
+        "computer",
         "hangman",
         "cuvant",
         "educatie",
@@ -25,34 +25,34 @@ int main() {
     int errors = 0;
     std::vector<char> usedLetters;
 
-    std::cout << "--- Joc: Spanzuratoarea ---\n";
-    std::cout << "Ghiceste literele din cuvant. Ai " << maxErrors << " incercari gresite.\n\n";
+    std::cout << "--- Game: Hangman ---\n";
+    std::cout << "Guess the letters in the word. You have " << maxErrors << " wrong attempts.\n\n";
 
     while (errors < maxErrors && guessed != secret) {
-        std::cout << "Cuvant: ";
+        std::cout << "Word: ";
         for (char c : guessed) {
             std::cout << c << ' ';
         }
         std::cout << "\n";
 
-        std::cout << "Litere folosite: ";
+        std::cout << "Used letters: ";
         for (char c : usedLetters) {
             std::cout << c << ' ';
         }
         std::cout << "\n";
 
-        std::cout << "Alege o litera: ";
+        std::cout << "Choose a letter: ";
         char letter;
         std::cin >> letter;
 
         if (!std::isalpha(letter)) {
-            std::cout << "Te rog introduce o litera valida.\n\n";
+            std::cout << "Please enter a valid letter.\n\n";
             continue;
         }
 
         letter = std::tolower(letter);
         if (std::find(usedLetters.begin(), usedLetters.end(), letter) != usedLetters.end()) {
-            std::cout << "Ai mai incercat deja litera '" << letter << "'.\n\n";
+            std::cout << "You already tried the letter '" << letter << "'.\n\n";
             continue;
         }
 
@@ -68,16 +68,15 @@ int main() {
 
         if (!found) {
             errors++;
-            std::cout << "Litera '" << letter << "' nu exista in cuvant. "
-                      << "Ai " << (maxErrors - errors) << " incercari ramase.\n\n";
+            std::cout << "The letter '" << letter << "' is not in the word. "
+                      << "You have " << (maxErrors - errors) << " attempts left.\n\n";
         } else {
-            std::cout << "Corect!\n\n";
+            std::cout << "Correct!\n\n";
         }
     }
 
     if (guessed == secret) {
-        std::cout << "Felicitari! Ai ghicit cuvantul: " << secret << "\n";
+        std::cout << "Congratulations! You guessed the word: " << secret << "\n";
     } else {
-    std::srand(static_cast<unsigned int>(std::time(nullptr)));
-        std::cout << "Ai pierdut. Cuvantul era: " << secret << "/n";
+        std::cout << "You lost. The word was: " << secret << "\n";
     }

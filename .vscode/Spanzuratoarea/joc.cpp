@@ -4,6 +4,65 @@
 #include <cstdlib>
 #include <ctime>
 #include <algorithm>
+#include <cctype>
+
+void drawHangman(int errors) {
+    const char* stages[] = {
+        "  +---+\n"
+        "  |   |\n"
+        "      |\n"
+        "      |\n"
+        "      |\n"
+        "      |\n"
+        "=========\n",
+        "  +---+\n"
+        "  |   |\n"
+        "  O   |\n"
+        "      |\n"
+        "      |\n"
+        "      |\n"
+        "=========\n",
+        "  +---+\n"
+        "  |   |\n"
+        "  O   |\n"
+        "  |   |\n"
+        "      |\n"
+        "      |\n"
+        "=========\n",
+        "  +---+\n"
+        "  |   |\n"
+        "  O   |\n"
+        " /|   |\n"
+        "      |\n"
+        "      |\n"
+        "=========\n",
+        "  +---+\n"
+        "  |   |\n"
+        "  O   |\n"
+        " /|\\  |\n"
+        "      |\n"
+        "      |\n"
+        "=========\n",
+        "  +---+\n"
+        "  |   |\n"
+        "  O   |\n"
+        " /|\\  |\n"
+        " /    |\n"
+        "      |\n"
+        "=========\n",
+        "  +---+\n"
+        "  |   |\n"
+        "  O   |\n"
+        " /|\\  |\n"
+        " / \\  |\n"
+        "      |\n"
+        "=========\n"
+    };
+
+    if (errors < 0) errors = 0;
+    if (errors > 6) errors = 6;
+    std::cout << stages[errors];
+}
 
 int main() {
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
@@ -29,6 +88,8 @@ int main() {
     std::cout << "Guess the letters in the word. You have " << maxErrors << " wrong attempts.\n\n";
 
     while (errors < maxErrors && guessed != secret) {
+        drawHangman(errors);
+
         std::cout << "Word: ";
         for (char c : guessed) {
             std::cout << c << ' ';

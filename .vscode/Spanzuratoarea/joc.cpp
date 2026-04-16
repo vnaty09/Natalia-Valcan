@@ -12,10 +12,10 @@ int main() {
         "programming",
         "computer",
         "hangman",
-        "cuvant",
-        "educatie",
-        "matematica",
-        "stea"
+        "word",
+        "education",
+        "mathematics",
+        "star"
     };
 
     std::string secret = words[std::rand() % words.size()];
@@ -80,3 +80,5 @@ int main() {
     } else {
         std::cout << "You lost. The word was: " << secret << "\n";
     }
+    return 0;
+}
